@@ -1,2 +1,2 @@
 # ml-course-intro-spring2020
-Lesson about KMeans Clustering
+Модуль "Введение в машинное обучение"
