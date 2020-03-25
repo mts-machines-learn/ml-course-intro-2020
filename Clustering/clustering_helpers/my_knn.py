@@ -1,4 +1,4 @@
-from sklearn.datasets.samples_generator import make_blobs, make_moons
+from sklearn.datasets import make_blobs, make_moons
 import numpy as np
 import matplotlib.pyplot as plt
 # from jupyterthemes import jtplot
@@ -26,6 +26,9 @@ def show_knn(X, y_pred, clusters):
     for i in range(clusters.shape[0]):
         plt.scatter(all_clusters[i][1:, 0], all_clusters[i][1:, 1], s=10, c=colors[i])
         plt.scatter(clusters[i][0], clusters[i][1], marker='*', s=200, c=colors[i])
+    plt.xlabel('feature1', fontsize=15)
+    plt.ylabel('feature2', fontsize=15)
+    plt.title('Kmeans', fontsize=20)
     plt.grid()
     plt.show()
 
@@ -35,6 +38,9 @@ def show_start(clusters, x_1, x_2):
     plt.scatter(x_1, x_2, c='#050505', s=10)
     for i in range(clusters.shape[0]):
         plt.scatter(clusters[i][0], clusters[i][1], marker='*', s=200, c=colors[i])
+    plt.xlabel('feature1', fontsize=15)
+    plt.ylabel('feature2', fontsize=15)
+    plt.title('Clusters', fontsize=20)
     plt.grid()
     plt.show()
 
