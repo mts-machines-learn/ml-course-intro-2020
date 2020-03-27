@@ -6,7 +6,7 @@ from ipywidgets import interact, IntSlider,  FloatSlider
 import numpy as np
 import pandas as pd
 from sklearn import datasets
-
+from IPython.display import display, Markdown
 
 def get_data(irises = ["iris setosa","iris virginica"]):
     iris_dict = {0:"iris setosa",1:"iris versicolor",2:"iris virginica"}
@@ -17,7 +17,7 @@ def get_data(irises = ["iris setosa","iris virginica"]):
 
 
 def print_data(X,Y):
-    df = pd.DataFrame(np.hstack((X, Y.reshape(-1,1))), columns=['Длина чашелистника', 'Ширина чашелистника', 'Вид Ириса'])
+    df = pd.DataFrame(np.hstack((X, Y.reshape(-1,1))), columns=['Длина чашелистика', 'Ширина чашелистика', 'Вид Ириса'])
     print(df)
 
 
@@ -49,11 +49,32 @@ def plot_data_with_gip(X,Y):
         plt.scatter(X[:,0][Y=='iris setosa'], X[:,1][Y=='iris setosa'], label='iris setosa', c='g')
         plt.scatter(X[:,0][Y=='iris virginica'], X[:,1][Y=='iris virginica'], label='iris virginica', c='b')
         plt.plot(X[:,0], (teta_0/teta_2 - teta_1*X[:,0])/teta_2)
-        plt.xlabel("Длина чашелистника, см", fontsize=17)
-        plt.ylabel("Ширина чашелистника, см", fontsize=17)
+        plt.xlabel("Длина чашелистика, см", fontsize=17)
+        plt.ylabel("Ширина чашелистика, см", fontsize=17)
         plt.legend(prop={'size': 12})
         plt.xlim([4, 8])
         plt.ylim([2, 4.5])
+        plt.show()
+
+
+def visualize_classification():
+    def res(x,y):
+        return -3.5 - 1.1*x + y
+    d_r = FloatSlider(min=-2, max=8, step=0.415, value=0, description='$dx_1$, $dx_2$:')
+    @interact(d_r=d_r)    
+    def plot_model_and_x(d_r):
+        create_base_plot()
+        X = np.linspace(-5,5,3)
+        Y = 3.5 + 1.1*X
+        x,y = -1.5+d_r,6-d_r*1.29
+        plt.plot(X,Y, label="$X\Theta=0$")
+        plt.xlabel("$x_1$", fontsize=17)
+        plt.ylabel("$x_2$", fontsize=17)
+        plt.scatter([x],[y],marker='*',c='r',s=200,label="$X_i$")
+        plt.title(f"Ответ линейной модели $X_i\Theta$: {round(res(x,y),2)},\n $sign(X_i\Theta)=${np.sign(round(res(x,y),2))}")
+        plt.xlim([-5, 5])
+        plt.ylim([-2, 8.5])
+        plt.legend()
         plt.show()
 
 
@@ -61,8 +82,8 @@ def plot_data(X,Y):
     create_base_plot()
     plt.scatter(X[:,0][Y=='iris setosa'], X[:,1][Y=='iris setosa'], label='iris setosa', c='g')
     plt.scatter(X[:,0][Y=='iris virginica'], X[:,1][Y=='iris virginica'], label='iris virginica', c='b')
-    plt.xlabel("Длина чашелистника, см", fontsize=17)
-    plt.ylabel("Ширина чашелистника, см", fontsize=17)
+    plt.xlabel("Длина чашелистика, см", fontsize=17)
+    plt.ylabel("Ширина чашелистика, см", fontsize=17)
     plt.legend(prop={'size': 12})
     plt.show()
 
@@ -84,12 +105,12 @@ def plot_indent_with_maj():
     y1 = (1 - x)**2
     y2 = np.array(list(map(lambda x: max(0, 1-x), x)))
     y3 = np.e**(-x)
-    y4 = np.log(1 + y3)
+    y4 = np.log2(1 + y3)
     plt.plot([-22, 0, 0, 22], [1, 1, 0, 0], label="$[M_i<0]$")
     plt.plot(x,y1, label="$(1 - M_i)^2$")
     plt.plot(x,y2, label="$max(0,1 - M_i)$")
     plt.plot(x,y3, label="$e^{-M_i}$")
-    plt.plot(x,y4, label="$ln(1 + e^{-M_i})$")
+    plt.plot(x,y4, label="$\log_{2}(1 + e^{-M_i})$")
     plt.xlabel("$M_i$", fontsize=17)
     plt.ylabel("$g(M_i)$", fontsize=17)
     plt.grid()
@@ -105,8 +126,8 @@ def plot_finaly_trained_model(X, kind_iris, theta):
     plt.scatter(X[:,0][kind_iris=='iris setosa'], X[:,1][kind_iris=='iris setosa'], label='iris setosa', c='g')
     plt.scatter(X[:,0][kind_iris=='iris virginica'], X[:,1][kind_iris=='iris virginica'], label='iris virginica', c='b')
     plt.plot(X[:,0], (teta_0/teta_2 - teta_1*X[:,0])/teta_2)
-    plt.xlabel("Длина чашелистника, см", fontsize=17)
-    plt.ylabel("Ширина чашелистника, см", fontsize=17)
+    plt.xlabel("Длина чашелистика, см", fontsize=17)
+    plt.ylabel("Ширина чашелистика, см", fontsize=17)
     plt.legend(prop={'size': 12})
     plt.xlim([4, 8])
     plt.ylim([2, 4.5])
@@ -121,8 +142,8 @@ def plot_dividing_line_iris(X, kind_iris):
     plt.scatter(X[:,0][kind_iris=='iris virginica'], X[:,1][kind_iris=='iris virginica'], label='iris virginica', c='b')
     plt.plot(X[:,0], (teta_0/teta_2 - teta_1*X[:,0])/teta_2)
     plt.legend(prop={'size': 12})
-    plt.xlabel("Длина чашелистника, см", fontsize=17)
-    plt.ylabel("Ширина чашелистника, см", fontsize=17)
+    plt.xlabel("Длина чашелистика, см", fontsize=17)
+    plt.ylabel("Ширина чашелистика, см", fontsize=17)
     plt.xlim([4, 8])
     plt.ylim([2, 4.5])
     plt.show()
@@ -147,9 +168,10 @@ def plot_div_mse_ce():
     x = np.linspace(0,1,50)
     y1 = np.abs(-2*(1-x))
     y2 = np.abs(-(1+np.e**-x))
-    plt.plot(x,y1, label="|div MSE|/DS")
-    plt.plot(x,y2, label="|div cross entropy|/DS")
+    plt.plot(x,y1, label="$\dfrac{1}{DS}|\dfrac{\partial L_{mse}}{\partial\Theta}|$")
+    plt.plot(x,y2, label="$\dfrac{1}{DS}|\dfrac{\partial L_{ce}}{\partial\Theta}|$")
     plt.grid()
+    plt.xlabel("$\sigma(X\Theta)$", fontsize=17)
     plt.legend()
     plt.show()
 
