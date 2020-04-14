@@ -184,7 +184,7 @@ def plot_pr_curve(recall,precision):
 
 
 def get_regress_data():
-    N=40
+    N=15
     X = np.linspace(-1, 8, N)
     np.random.seed(0)
     return X.reshape(-1,1), 1/20*((X*(X+1)*(X-3)*(X-5)*(X-8) + 20*np.random.normal(size=(N,))))
@@ -232,10 +232,11 @@ def plot_regress_train_test_data(X_train, X_test, y_train, y_test):
 
 def plot_regress_data_and_model(X,y,lr):
     create_base_plot()
-    plt.scatter(X[:,0],y)
-    plt.plot(X[:,0], lr.intercept_ + X@lr.coef_)
+    plt.scatter(X[:,0],y,label="data")
+    plt.plot(X[:,0], lr.intercept_ + X@lr.coef_,c = "r",label="model")
     plt.xlabel("X")
     plt.ylabel("y")
+    plt.legend()
     plt.show()
 
 def creat_polynomial_features(X, n):
