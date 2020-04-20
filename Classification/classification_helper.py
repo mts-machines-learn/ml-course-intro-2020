@@ -48,7 +48,7 @@ def plot_data_with_gip(X,Y):
         create_base_plot()
         plt.scatter(X[:,0][Y=='iris setosa'], X[:,1][Y=='iris setosa'], label='iris setosa', c='g')
         plt.scatter(X[:,0][Y=='iris virginica'], X[:,1][Y=='iris virginica'], label='iris virginica', c='b')
-        plt.plot(X[:,0], (teta_0/teta_2 - teta_1*X[:,0])/teta_2)
+        plt.plot(X[:,0], (-teta_0 - teta_1*X[:,0])/teta_2)
         plt.xlabel("Длина чашелистика, см", fontsize=17)
         plt.ylabel("Ширина чашелистика, см", fontsize=17)
         plt.legend(prop={'size': 12})
@@ -125,7 +125,7 @@ def plot_finaly_trained_model(X, kind_iris, theta):
     teta_0, teta_1, teta_2 = theta
     plt.scatter(X[:,0][kind_iris=='iris setosa'], X[:,1][kind_iris=='iris setosa'], label='iris setosa', c='g')
     plt.scatter(X[:,0][kind_iris=='iris virginica'], X[:,1][kind_iris=='iris virginica'], label='iris virginica', c='b')
-    plt.plot(X[:,0], (teta_0/teta_2 - teta_1*X[:,0])/teta_2)
+    plt.plot(X[:,0], (-teta_0 - teta_1*X[:,0])/teta_2)
     plt.xlabel("Длина чашелистика, см", fontsize=17)
     plt.ylabel("Ширина чашелистика, см", fontsize=17)
     plt.legend(prop={'size': 12})
@@ -140,7 +140,7 @@ def plot_dividing_line_iris(X, kind_iris):
     teta_0, teta_1, teta_2 = theta
     plt.scatter(X[:,0][kind_iris=='iris setosa'], X[:,1][kind_iris=='iris setosa'], label='iris setosa', c='g')
     plt.scatter(X[:,0][kind_iris=='iris virginica'], X[:,1][kind_iris=='iris virginica'], label='iris virginica', c='b')
-    plt.plot(X[:,0], (teta_0/teta_2 - teta_1*X[:,0])/teta_2)
+    plt.plot(X[:,0], (-teta_0 - teta_1*X[:,0])/teta_2)
     plt.legend(prop={'size': 12})
     plt.xlabel("Длина чашелистика, см", fontsize=17)
     plt.ylabel("Ширина чашелистика, см", fontsize=17)
