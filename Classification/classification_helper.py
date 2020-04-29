@@ -17,7 +17,7 @@ def get_data(irises = ["iris setosa","iris virginica"]):
 
 
 def print_data(X,Y):
-    df = pd.DataFrame(np.hstack((X, Y.reshape(-1,1))), columns=['Длина чашелистика', 'Ширина чашелистика', 'Вид Ириса'])
+    df = pd.DataFrame(np.hstack((X, Y.reshape(-1,1))), columns=['Длина чашелистика', 'Ширина чашелистика', 'Вид ириса'])
     print(df)
 
 
